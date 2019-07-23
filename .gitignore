@@ -114,3 +114,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 .vscode
+dist

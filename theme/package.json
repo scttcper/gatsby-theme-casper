@@ -2,11 +2,11 @@
   "name": "gatsby-theme-casper",
   "description": "Casper for gatsby",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "dist",
   "author": "Scott Cooper <scttcper@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "tsc",
     "clean": "rimraf public",
     "dev": "gatsby develop",
     "lint": "eslint src/**/**/*.tsx src/**/**/*.ts",
@@ -43,6 +43,7 @@
     "gatsby-transformer-sharp": "2.2.4",
     "gatsby-transformer-yaml": "2.2.3",
     "lodash": "4.17.15",
+    "mkdirp": "^0.5.1",
     "modern-normalize": "0.5.0",
     "normalize.css": "8.0.1",
     "polished": "3.4.1",
@@ -58,6 +59,7 @@
   "devDependencies": {
     "@types/classnames": "2.2.9",
     "@types/lodash": "4.14.136",
+    "@types/mkdirp": "^0.5.2",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
@@ -78,5 +80,10 @@
   },
   "engines": {
     "node": ">=8.0.0"
-  }
+  },
+  "keywords": [
+    "gatsby",
+    "gatsby-theme",
+    "gatsby-plugin"
+  ]
 }

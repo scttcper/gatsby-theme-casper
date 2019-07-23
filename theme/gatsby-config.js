@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
+const mkdirp = require('mkdirp');
+const fs = require('fs');
 
 exports.onPreBootstrap = ({ store, reporter }) => {
   const { program } = store.getState()
 
   const dirs = [
-    path.join(program.directory, "content"),
+    path.join(program.directory, 'content'),
   ]
 
   dirs.forEach(dir => {
@@ -30,7 +34,7 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'content',
-        path: path.join(__dirname, 'src', 'content'),
+        path: path.join(process.cwd(), 'content'),
       },
     },
     {

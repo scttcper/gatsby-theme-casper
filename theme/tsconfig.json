@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "esnext",
+    "target": "es2017",
     "jsx": "preserve",
     "lib": ["dom", "es2015", "es2017"],
     "strict": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "removeComments": false,
     "preserveConstEnums": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "listEmittedFiles": true
   },
   "include": ["./src/**/*"]
 }

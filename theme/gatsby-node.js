@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const _ = require('lodash');
 
@@ -38,7 +40,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
         name: 'primaryTag',
         value: primaryTag || '',
       });
+      break;
     }
+
+    default:
+      break;
   }
 };
 
@@ -118,7 +124,7 @@ exports.createPages = async ({ graphql, actions }) => {
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
       path: i === 0 ? '/' : `/${i + 1}`,
-      component: path.resolve('./src/templates/index.tsx'),
+      component: path.join(__dirname, './src/templates/index.tsx'),
       context: {
         limit: postsPerPage,
         skip: i * postsPerPage,
@@ -144,7 +150,7 @@ exports.createPages = async ({ graphql, actions }) => {
       // template.
       //
       // Note that the template has to exist first, or else the build will fail.
-      component: path.resolve(`./src/templates/${layout || 'post'}.tsx`),
+      component: path.join(__dirname, `./src/templates/${layout || 'post'}.tsx`),
       context: {
         // Data passed to context is available in page queries as GraphQL variables.
         slug,
@@ -156,7 +162,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // Create tag pages
-  const tagTemplate = path.resolve('./src/templates/tags.tsx');
+  const tagTemplate = path.join(__dirname, './src/templates/tags.tsx');
   const tags = _.uniq(
     _.flatten(
       result.data.allMarkdownRemark.edges.map(edge => {
@@ -175,7 +181,7 @@ exports.createPages = async ({ graphql, actions }) => {
   });
 
   // Create author pages
-  const authorTemplate = path.resolve('./src/templates/author.tsx');
+  const authorTemplate = path.join(__dirname, './src/templates/author.tsx');
   result.data.allAuthorYaml.edges.forEach(edge => {
     createPage({
       path: `/author/${_.kebabCase(edge.node.id)}/`,
@@ -189,7 +195,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   // adds sourcemaps for tsx in dev mode
-  if (stage === `develop` || stage === `develop-html`) {
+  if (stage === 'develop' || stage === 'develop-html') {
     actions.setWebpackConfig({
       devtool: 'eval-source-map',
     });
