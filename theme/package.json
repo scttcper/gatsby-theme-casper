@@ -9,8 +9,8 @@
     "build": "gatsby build",
     "clean": "rimraf public",
     "dev": "gatsby develop",
-    "lint": "eslint src/**/*.tsx src/**/*.ts",
-    "lint:fix": "eslint --fix src/**/*.tsx src/**/*.ts",
+    "lint": "eslint src/**/**/*.tsx src/**/**/*.ts",
+    "lint:fix": "eslint --fix src/**/**/*.tsx src/**/**/*.ts",
     "start": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

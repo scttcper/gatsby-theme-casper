@@ -21,6 +21,7 @@ declare module 'rehype-react' {
   }
   class RehypeReact {
     Compiler: any
+
     constructor(options: RehypeOptions);
   }
   export default RehypeReact;

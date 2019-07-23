@@ -38,8 +38,7 @@ const SubscribeLogo = () => (
     render={(data: SiteNavLogoProps) =>
       data.logo && (
         <SubscribeOverlayLogo src={data.logo.childImageSharp.fixed.src} alt={config.title} />
-      )
-    }
+      )}
   />
 );
 
