@@ -5,6 +5,7 @@
  */
 
 module.exports = {
+  plugins: ["gatsby-theme-casper"],
   siteMetadata: {
     title: 'Ghost',
     description: 'The professional publishing platform',
@@ -22,5 +23,4 @@ module.exports = {
     footer: 'is based on Gatsby Casper',
     postsPerPage: 6,
   },
-  plugins: ["gatsby-theme-casper"],
 }

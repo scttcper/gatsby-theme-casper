@@ -6,21 +6,105 @@ This is a Gatsby theme that, when installed, creates a static blog. A port of [C
 
 ### 🚀 Quick start
 
-1.  **Create a Gatsby site.**
+1.  **Create a Gatsby site**
 
-    Use the Gatsby CLI to create a new site, specifying the gatsby-theme-casper starter.
+    Use the Gatsby CLI to create a new site
 
     ```sh
-    # create a new Gatsby site using the gatsby-theme-casper starter
-    gatsby new my-theme https://github.com/scttcper/gatsby-theme-casper
+    gatsby new my-bog
     ```
 
-1.  **Start developing.**
+1.  **Install theme**
 
     Navigate into your new site’s directory and start it up.
 
     ```sh
-    cd my-theme/
+    cd my-blog/
+    npm install gatsby-theme-casper
+    ```
+
+1.  **Configure gatsby theme**
+
+    edit gatsby-config.js
+
+    ```js
+    module.exports = {
+      // add plugin gatsby-theme-casper
+      plugins: ["gatsby-theme-casper"],
+
+      // setup your siteMetadata, further described below
+      siteMetadata: {
+        title: 'Ghost',
+        description: 'The professional publishing platform',
+        coverImage: 'img/blog-cover.jpg',
+        logo: 'img/ghost-logo.png',
+        lang: 'en',
+        siteUrl: 'https://gatsby-casper.netlify.com',
+        facebook: 'https://www.facebook.com/ghost',
+        twitter: 'https://twitter.com/tryghost',
+        showSubscribe: true,
+        mailchimpAction: 'https://twitter.us19.list-manage.com/subscribe/post?u=a89b6987ac248c81b0b7f3a0f&amp;id=7d777b7d75',
+        mailchimpName: 'b_a89b6987ac248c81b0b7f3a0f_7d777b7d75',
+        mailchimpEmailFieldName: 'MERGE0',
+        googleSiteVerification: 'GoogleCode',
+        footer: 'is based on Gatsby Casper',
+        postsPerPage: 6,
+      },
+    }
+    ```
+
+1. **Create content directory**
+
+    Create a content directory, this will be used to store your markdown blog.
+
+
+    Create a author.yaml
+
+    ```yaml
+    - id: Ghost
+      # relative path to image
+      avatar: avatars/ghost.png
+      bio: The professional publishing platform
+      twitter: TryGhost
+      facebook: ghost
+      website: https://ghost.org/
+      location: On a plane
+      # relative path to profile image for author
+      profile_image: avatars/ghost.png
+    ```
+
+    Create a tag.yaml to describe your tags (optional)
+    ```yaml
+    - id: speeches
+      description: Some of the greatest words ever spoken.
+      image: img/speeches-cover.jpg
+    ```
+
+    Create a blog post
+    ```md
+    ---
+    layout: post
+    title: Github Source
+    image: avatars/ghost.png
+    author: Ghost
+    date: 2019-03-10T10:00:00.000Z
+    draft: false
+    tags:
+      - Source
+    ---
+
+    my blog post content
+    ```
+
+    Create a content/img directory with the following files
+    blog-cover.jpg used on the home page
+    ghost-logo.png used as the logo on the homepage
+
+1.  **Start development**
+
+    start it up
+
+    ```sh
     gatsby develop
     ```
 

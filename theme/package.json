@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-casper",
   "description": "Casper for gatsby",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist",
   "author": "Scott Cooper <scttcper@gmail.com>",
   "license": "MIT",
@@ -85,5 +85,6 @@
     "gatsby",
     "gatsby-theme",
     "gatsby-plugin"
-  ]
+  ],
+  "repository": "scttcper/gatsby-theme-casper"
 }
