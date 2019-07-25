@@ -5,25 +5,35 @@ const mkdirp = require('mkdirp');
 const fs = require('fs');
 
 exports.onPreBootstrap = ({ store, reporter }) => {
-  const { program } = store.getState()
+  const { program } = store.getState();
 
-  const dirs = [
-    path.join(program.directory, 'content'),
-  ]
+  const dirs = [path.join(program.directory, 'content')];
 
   dirs.forEach(dir => {
     if (!fs.existsSync(dir)) {
-      reporter.log(`creating the ${dir} directory`)
-      mkdirp.sync(dir)
+      reporter.log(`creating the ${dir} directory`);
+      mkdirp.sync(dir);
     }
-  })
-}
+  });
+};
 
 module.exports = {
   siteMetadata: {
     title: 'Ghost',
     description: 'The professional publishing platform',
+    coverImage: 'img/blog-cover.jpg',
+    logo: 'img/ghost-logo.png',
+    lang: 'en',
     siteUrl: 'https://gatsby-casper.netlify.com', // full path to blog - no ending slash
+    facebook: 'https://www.facebook.com/ghost',
+    twitter: 'https://twitter.com/tryghost',
+    showSubscribe: false, // subscribe button in site nav and home page
+    mailchimpAction: '', // 'https://twitter.us19.list-manage.com/subscribe/post?u=a89b6987ac248c81b0b7f3a0f&amp;id=7d777b7d75',
+    mailchimpName: '', // 'b_a89b6987ac248c81b0b7f3a0f_7d777b7d75',
+    mailchimpEmailFieldName: '', // 'MERGE0',
+    googleSiteVerification: '', // 'GoogleCode',
+    footer: 'is based on Gatsby Casper',
+    postsPerPage: 6,
   },
   mapping: {
     'MarkdownRemark.frontmatter.author': 'AuthorYaml',

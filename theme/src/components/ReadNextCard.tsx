@@ -5,7 +5,6 @@ import * as _ from 'lodash';
 
 import { colors } from '../styles/colors';
 import InfinityIcon from './icons/infinity';
-import config from '../website-config';
 
 export interface ReadNextCardStylesProps {
   coverImage: string;
@@ -167,6 +166,11 @@ export interface ReadNextQuery {
       fluid: any;
     };
   };
+  site: {
+    siteMetadata: {
+      title: string;
+    };
+  };
 }
 
 const ReadNextCard: React.FC<ReadNextProps> = props => {
@@ -183,14 +187,19 @@ const ReadNextCard: React.FC<ReadNextProps> = props => {
               }
             }
           }
+          site {
+            siteMetadata {
+              title
+            }
+          }
         }
       `}
       // tslint:disable-next-line:react-this-binding-issue
-      render={({ header }: ReadNextQuery) => (
+      render={({ header, site }: ReadNextQuery) => (
         <ReadNextCardStyles coverImage={header.childImageSharp.fluid.src}>
           <ReadNextCardHeader>
             <ReadNextCardHeaderSitetitle>
-              &mdash; {config.title} &mdash;
+              &mdash; {site.siteMetadata.title} &mdash;
             </ReadNextCardHeaderSitetitle>
             <ReadNextCardHeaderTitle>
               <Link to={`/tags/${_.kebabCase(props.tags[0])}/`}>{props.tags[0]}</Link>

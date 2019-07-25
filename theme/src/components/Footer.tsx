@@ -3,10 +3,10 @@ import { setLightness } from 'polished';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { colors } from '../styles/colors';
 import { outer, inner } from '../styles/shared';
-import config from '../website-config';
 
 const SiteFooter = css`
   position: relative;
@@ -65,7 +65,32 @@ const SiteFooterNav = styled.nav`
   }
 `;
 
+interface FooterData {
+  site: {
+    siteMetadata: {
+      title: string;
+      facebook?: string;
+      twitter?: string;
+      footer: string;
+    };
+  };
+}
+
 const Footer: React.FC = () => {
+  const data = useStaticQuery<FooterData>(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          facebook
+          twitter
+          footer
+        }
+      }
+    }
+  `);
+  const config = data.site.siteMetadata;
+
   return (
     <footer css={[outer, SiteFooter]}>
       <div css={[inner, SiteFooterContent]}>

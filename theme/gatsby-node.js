@@ -106,6 +106,11 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      site {
+        siteMetadata {
+          postsPerPage
+        }
+      }
     }
   `);
 
@@ -118,7 +123,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const posts = result.data.allMarkdownRemark.edges;
 
   // Create paginated index
-  const postsPerPage = 6;
+  const postsPerPage = result.data.site.siteMetadata.postsPerPage || 6;
   const numPages = Math.ceil(posts.length / postsPerPage);
 
   Array.from({ length: numPages }).forEach((_, i) => {

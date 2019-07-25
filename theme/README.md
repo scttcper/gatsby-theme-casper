@@ -23,23 +23,6 @@ Either disable subscribe or setup a mailchimp list and add the form action and h
 Now push to whatever repo you want!
 
 
-### Progress
-- [x] emotion / component styles
-- [x] home page
-- [x] tag page
-- [x] author page
-- [x] blog page
-  - [x] subscribe form - using [mailchimp](https://mailchimp.com)
-  - [ ] full width images in markdown? - not sure if possible
-  - [ ] multiple post authors
-  - [ ] floating reading progress bar
-- [x] 404 page
-- [x] subscribe modal/overlay
-- [x] rss feed
-- [x] polish ✨
-  - [x] meta tags
-  - [x] page titles
-  - [x] pagination
 
 ### Deploy to Netlify
 

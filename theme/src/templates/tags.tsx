@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import Helmet from 'react-helmet';
 
 import Footer from '../components/Footer';
 import SiteNav from '../components/header/SiteNav';
@@ -18,8 +19,6 @@ import {
   SiteTitle,
 } from '../styles/shared';
 import { PageContext } from './post';
-import Helmet from 'react-helmet';
-import config from '../website-config';
 
 interface TagTemplateProps {
   pathContext: {
@@ -48,10 +47,21 @@ interface TagTemplateProps {
         node: PageContext;
       }>;
     };
+    site: {
+      siteMetadata: {
+        title: string;
+        lang: string;
+        description: string;
+        siteUrl: string;
+        facebook?: string;
+        twitter?: string;
+      };
+    };
   };
 }
 
 const Tags: React.FC<TagTemplateProps> = props => {
+  const config = props.data.site.siteMetadata;
   const tag = (props.pageContext.tag) ? props.pageContext.tag : '';
   const { edges, totalCount } = props.data.allMarkdownRemark;
   const tagData = props.data.allTagYaml.edges.find(
@@ -187,6 +197,16 @@ export const pageQuery = graphql`
             slug
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        lang
+        description
+        siteUrl
+        facebook
+        twitter
       }
     }
   }

@@ -1,7 +1,9 @@
+/* eslint-disable operator-linebreak */
 import { graphql } from 'gatsby';
 import React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import Helmet from 'react-helmet';
 
 import Footer from '../components/Footer';
 import SiteNav from '../components/header/SiteNav';
@@ -22,8 +24,6 @@ import {
 } from '../styles/shared';
 import { PageContext } from './post';
 import Facebook from '../components/icons/facebook';
-import Helmet from 'react-helmet';
-import config from '../website-config';
 import Website from '../components/icons/website';
 import Twitter from '../components/icons/twitter';
 
@@ -109,19 +109,27 @@ interface AuthorTemplateProps {
         };
       };
     };
+    site: {
+      siteMetadata: {
+        title: string;
+        lang: string;
+        description: string;
+        siteUrl: string;
+        facebook?: string;
+        twitter?: string;
+      };
+    };
   };
 }
 
 const Author: React.FC<AuthorTemplateProps> = props => {
   const author = props.data.authorYaml;
+  const config = props.data.site.siteMetadata;
 
-  const edges = props.data.allMarkdownRemark.edges.filter(
-    edge => {
-      const isDraft = (edge.node.frontmatter.draft !== true ||
-        process.env.NODE_ENV === 'development');
-      return isDraft && edge.node.frontmatter.author && edge.node.frontmatter.author.id === author.id;
-    }
-  );
+  const edges = props.data.allMarkdownRemark.edges.filter(edge => {
+    const isDraft = edge.node.frontmatter.draft !== true || process.env.NODE_ENV === 'development';
+    return isDraft && edge.node.frontmatter.author && edge.node.frontmatter.author.id === author.id;
+  });
   const totalCount = edges.length;
 
   return (
@@ -160,9 +168,9 @@ const Author: React.FC<AuthorTemplateProps> = props => {
           css={[outer, SiteHeader]}
           style={{
             // eslint-disable-next-line @typescript-eslint/camelcase
-            backgroundImage: author.profile_image ?
-              `url(${author.profile_image.childImageSharp.fluid.src})` :
-              '',
+            backgroundImage: author.profile_image
+              ? `url(${author.profile_image.childImageSharp.fluid.src})`
+              : '',
           }}
         >
           <div css={inner}>
@@ -286,9 +294,9 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      filter: { frontmatter: { draft: { ne: true } } },
-      sort: { fields: [frontmatter___date], order: DESC },
-      limit: 2000,
+      filter: { frontmatter: { draft: { ne: true } } }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 2000
     ) {
       edges {
         node {
@@ -325,6 +333,16 @@ export const pageQuery = graphql`
             slug
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        lang
+        description
+        siteUrl
+        facebook
+        twitter
       }
     }
   }

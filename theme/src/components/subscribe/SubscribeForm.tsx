@@ -2,9 +2,9 @@ import { darken, desaturate, lighten, mix } from 'polished';
 import * as React from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { colors } from '../../styles/colors';
-import config from '../../website-config';
 
 const SubscribeFormStyles = css`
   @media (max-width: 500px) {
@@ -82,7 +82,30 @@ const FormGroup = styled.div`
   }
 `;
 
+interface SubscriberFormData {
+  site: {
+    siteMetadata: {
+      mailchimpAction: string;
+      mailchimpEmailFieldName: string;
+      mailchimpName: string;
+    };
+  };
+}
+
 const SubscribeForm: React.FC = () => {
+  const data = useStaticQuery<SubscriberFormData>(graphql`
+    query {
+      site {
+        siteMetadata {
+          mailchimpAction
+          mailchimpEmailFieldName
+          mailchimpName
+        }
+      }
+    }
+  `);
+  const config = data.site.siteMetadata;
+
   return (
     <form
       noValidate

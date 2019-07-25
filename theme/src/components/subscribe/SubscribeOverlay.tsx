@@ -1,8 +1,8 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { StaticQuery, graphql } from 'gatsby';
 
 import { colors } from '../../styles/colors';
-import config from '../../website-config';
 import SubscribeForm from './SubscribeForm';
 import SubscribeLogo from './SubscribeLogo';
 
@@ -149,6 +149,14 @@ interface SubscribeState {
   isOpen: boolean;
 }
 
+interface SubscribeOverylayData {
+  site: {
+    siteMetadata: {
+      title: string;
+    };
+  };
+}
+
 class SubscribeModal extends React.Component<any, SubscribeState> {
   state = { isOpen: false };
 
@@ -182,18 +190,38 @@ class SubscribeModal extends React.Component<any, SubscribeState> {
 
   render() {
     return (
-      <SubscribeOverlay open={this.state.isOpen}>
-        <SubscribeOverlayClose onClick={this.close} />
-        <SubscribeOverlayContent>
-          <SubscribeLogo />
-          <SubscribeOverlayTitle>Subscribe to {config.title}</SubscribeOverlayTitle>
-          <SubscribeOverlayDescription>
-            Stay up to date! Get all the latest &amp; greatest posts delivered straight to your
-            inbox
-          </SubscribeOverlayDescription>
-          <SubscribeForm />
-        </SubscribeOverlayContent>
-      </SubscribeOverlay>
+      <StaticQuery
+        query={graphql`
+          query {
+            site {
+              siteMetadata {
+                title
+                facebook
+                twitter
+                footer
+              }
+            }
+          }
+        `}
+        // tslint:disable-next-line:react-this-binding-issue
+        render={(props: SubscribeOverylayData) => {
+          const config = props.site.siteMetadata;
+          return (
+            <SubscribeOverlay open={this.state.isOpen}>
+              <SubscribeOverlayClose onClick={this.close} />
+              <SubscribeOverlayContent>
+                <SubscribeLogo />
+                <SubscribeOverlayTitle>Subscribe to {config.title}</SubscribeOverlayTitle>
+                <SubscribeOverlayDescription>
+                  Stay up to date! Get all the latest &amp; greatest posts delivered straight to
+                  your inbox
+                </SubscribeOverlayDescription>
+                <SubscribeForm />
+              </SubscribeOverlayContent>
+            </SubscribeOverlay>
+          );
+        }}
+      />
     );
   }
 }

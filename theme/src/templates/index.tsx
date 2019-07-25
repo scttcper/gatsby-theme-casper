@@ -8,7 +8,6 @@ import SiteNav from '../components/header/SiteNav';
 import PostCard from '../components/PostCard';
 import Wrapper from '../components/Wrapper';
 import IndexLayout from '../layouts';
-import config from '../website-config';
 import Pagination from '../components/Pagination';
 
 import {
@@ -72,6 +71,17 @@ export interface IndexProps {
     numPages: number;
   };
   data: {
+    site: {
+      siteMetadata: {
+        title: string;
+        lang: string;
+        description: string;
+        siteUrl: string;
+        facebook?: string;
+        twitter?: string;
+        googleSiteVerification: string;
+      };
+    };
     logo: {
       childImageSharp: {
         fixed: any;
@@ -93,6 +103,7 @@ export interface IndexProps {
 const IndexPage: React.FC<IndexProps> = props => {
   const width = props.data.header.childImageSharp.fluid.sizes.split(', ')[1].split('px')[0];
   const height = String(Number(width) / props.data.header.childImageSharp.fluid.aspectRatio);
+  const config = props.data.site.siteMetadata;
 
   return (
     <IndexLayout css={HomePosts}>
@@ -110,7 +121,9 @@ const IndexPage: React.FC<IndexProps> = props => {
           content={`${config.siteUrl}${props.data.header.childImageSharp.fluid.src}`}
         />
         {config.facebook && <meta property="article:publisher" content={config.facebook} />}
-        {config.googleSiteVerification && <meta name="google-site-verification" content={config.googleSiteVerification} />}
+        {config.googleSiteVerification && (
+          <meta name="google-site-verification" content={config.googleSiteVerification} />
+        )}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={config.title} />
         <meta name="twitter:description" content={config.description} />
@@ -169,7 +182,10 @@ const IndexPage: React.FC<IndexProps> = props => {
           </div>
         </main>
         {props.children}
-        <Pagination currentPage={props.pageContext.currentPage} numPages={props.pageContext.numPages} />
+        <Pagination
+          currentPage={props.pageContext.currentPage}
+          numPages={props.pageContext.numPages}
+        />
         <Footer />
       </Wrapper>
     </IndexLayout>
@@ -199,9 +215,9 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC },
-      filter: { frontmatter: { draft: { ne: true } } },
-      limit: $limit,
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: true } } }
+      limit: $limit
       skip: $skip
     ) {
       edges {
@@ -239,6 +255,17 @@ export const pageQuery = graphql`
             slug
           }
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+        lang
+        description
+        siteUrl
+        facebook
+        twitter
+        googleSiteVerification
       }
     }
   }
