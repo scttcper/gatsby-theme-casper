@@ -9,14 +9,14 @@ tags:
 ---
 
 You'll find the source of this blog on GitHub.  
-GitHub - https://github.com/scttcper/gatsby-casper
+GitHub - https://github.com/scttcper/gatsby-theme-casper
 
 ### Getting Started
 
 Clone this repo.
 
 ```
-git clone https://github.com/scttcper/gatsby-casper.git --depth=1
+git clone https://github.com/scttcper/gatsby-theme-casper.git --depth=1
 ```
 
 Remove .git folder and setup a new one
