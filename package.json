@@ -4,5 +4,8 @@
     "theme",
     "demo"
   ],
+  "scripts": {
+    "build": "bash -c \"cd theme && yarn build\" && bash -c \"cd demo && yarn build\""
+  },
   "repository": "scttcper/gatsby-theme-casper"
 }
