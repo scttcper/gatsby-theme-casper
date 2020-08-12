@@ -1,3 +1,5 @@
+The non-theme [gatsby-casper](https://github.com/scttcper/gatsby-casper) continues to be supported.
+
 # Gatsby Theme Casper
 
 Demo: https://gatsby-casper-theme.netlify.com/
